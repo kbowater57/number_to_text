@@ -61,7 +61,7 @@ std::string three_digit_to_string(int digits_in) {
 std::string nine_digit_to_string(int digits_in) {
 	
 	if (digits_in == 0) {
-		return "zero";
+		return "Zero";
 	}
 	
 
@@ -78,9 +78,12 @@ std::string nine_digit_to_string(int digits_in) {
 
 			}
 			digits_in %= powers[x];
+			if (digits_in > 0) {
+				output_string = output_string + ", ";
+			}
 		}
 	}
-
+	output_string[0] = toupper(output_string[0]);
 	return output_string;
 }
 
