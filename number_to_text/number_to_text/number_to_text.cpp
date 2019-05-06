@@ -25,8 +25,7 @@ std::string two_digit_to_string(int digits_in) {
 		return teens[digits_in - 10];
 	}
 
-	// if neither of above, then deal with "normal" two-digit numbers. The below two are generating single digits\
-	for the units and tens columns of the number
+	// if neither of above, then deal with "normal" two-digit numbers. The below two are generating single digits for the units and tens columns of the number
 
 	int units_digit = digits_in % 10; 
 	int tens_digit = digits_in / 10;
@@ -59,13 +58,39 @@ std::string three_digit_to_string(int digits_in) {
 	}
 }
 
+std::string nine_digit_to_string(int digits_in) {
+	
+	if (digits_in == 0) {
+		return "zero";
+	}
+	
+
+	std::string output_string = "";
+	std::string suffix[4] = { ""," thousand"," million"," billion" };
+	int powers[4] = { 1,1000,1000000,1000000000 };
+
+	for (int x = 2; x != -1; --x) {
+		if (digits_in > powers[x]-1) {
+			int three_digits = digits_in / powers[x];
+			std::string three_digit_string = three_digit_to_string(three_digits); 
+			if (three_digits != 0) {
+				output_string = output_string + three_digit_string + suffix[x] ;
+
+			}
+			digits_in %= powers[x];
+		}
+	}
+
+	return output_string;
+}
+
 int main()
 {
     std::cout << "Type your number\n"; 
 	int digits;
 	std::cin >> digits;
-	if (digits < 1000){
-		std::cout << three_digit_to_string(digits);
+	if (digits < 1000000000){
+		std::cout << nine_digit_to_string(digits);
 	} else {
 		std::cout << excuse;
 	}
