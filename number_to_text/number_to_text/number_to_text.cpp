@@ -120,21 +120,25 @@ std::string nine_digit_to_string(int digits_in) {
 			}
 		}
 	}
-	// Capitalise first letter and add full stop at end
-	output_string[0] = toupper(output_string[0]);
-	output_string = output_string + ".";
 	return output_string;
 }
 
 int main()
 {
-    std::cout << "Type your number, up to nine digits long:\n"; 
-	int digits;
-	std::cin >> digits;
-	if (digits < 1000000000){
-		std::cout << nine_digit_to_string(digits);
-	} else {
-		// Catch invalid inputs
-		std::cout << "I don't know how to print that";
+	std::cout << "This program will print the string representation of positive integers less than 1 billion.\n";
+	int digits = 0;
+	while (digits != -1) {
+		std::cout << "Type your number, or -1 to end.\n";
+		std::cin >> digits;
+		if (digits == -1) {
+			break;
+		}
+		if (digits < 1000000000 ) {
+			std::cout << "Your number is " + nine_digit_to_string(digits) + ".\n";
+		}
+		else {
+			// Catch invalid inputs
+			std::cout << "I don't know how to print that";
+		}
 	}
 }
